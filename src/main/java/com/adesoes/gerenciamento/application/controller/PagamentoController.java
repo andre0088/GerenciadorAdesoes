@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.adesoes.gerenciamento.domain.model.pagamento.Pagamento;
 import com.adesoes.gerenciamento.domain.service.PagamentoService;
 import com.adesoes.gerenciamento.infrastructure.converter.custom.ModelMapperPagamentoService;
+import com.adesoes.gerenciamento.infrastructure.rabbitmq.RabbitmqConstantes;
+import com.adesoes.gerenciamento.infrastructure.rabbitmq.RabbitmqService;
 import com.adesoes.gerenciamento.presentation.dto.pagamento.PagamentoRequest;
 import com.adesoes.gerenciamento.presentation.dto.pagamento.PagamentoResponse;
 
@@ -33,6 +35,9 @@ public class PagamentoController {
 	
 	@Autowired
 	private ModelMapperPagamentoService modelMapper;
+	
+	@Autowired
+	private RabbitmqService rabbitmqService;
 	
 	@GetMapping
 	public List<PagamentoResponse> listar(){
@@ -53,6 +58,9 @@ public class PagamentoController {
 		Pagamento p = null;
 		try {
 			p = pagamentoService.cadastrar(modelMapper.pagamentoRequestToPagamento(pagamentoRequest));
+			this.rabbitmqService.enviaMensagem(RabbitmqConstantes.FILA_PAGAMENTO, modelMapper.pagamentoToResponse(p));
+			System.out.println("Pagamento enviado com sucesso!");
+			
 		} catch (Exception e) {
 			e.getMessage();
 		}

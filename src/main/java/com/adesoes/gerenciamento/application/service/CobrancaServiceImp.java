@@ -74,7 +74,8 @@ public class CobrancaServiceImp implements CobrancaService{
 		
 		adesaoService.mudarStatusCobranca(cobranca.getAdesao().getIdAdesao(), true);
 		
-		if(cobranca.getAdesao().getModalidade() == ModalidadeCobranca.RECORRENTE && cobranca.getAdesao().getParcelaAtual() < cobranca.getAdesao().getNumeroDeParcelas()){
+		if(cobranca.getAdesao().getModalidade() == ModalidadeCobranca.RECORRENTE 
+				&& cobranca.getAdesao().getParcelaAtual() < cobranca.getAdesao().getNumeroDeParcelas()){
 			adesaoService.incrementarParcelas(cobranca.getAdesao().getIdAdesao());
 		}
 		

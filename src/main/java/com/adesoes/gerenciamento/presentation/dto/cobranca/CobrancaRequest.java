@@ -1,6 +1,7 @@
 package com.adesoes.gerenciamento.presentation.dto.cobranca;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 
 public class CobrancaRequest {
@@ -10,6 +11,10 @@ public class CobrancaRequest {
 	private int parcela;
 	
 	private long idAdesao;
+	
+	private String status;
+	
+	private LocalDateTime data;
 
 	public BigDecimal getValor() {
 		return valor;
@@ -33,6 +38,22 @@ public class CobrancaRequest {
 
 	public void setIdAdesao(long idAdesao) {
 		this.idAdesao = idAdesao;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public LocalDateTime getData() {
+		return data;
+	}
+
+	public void setData(LocalDateTime data) {
+		this.data = data;
 	}
 	
 	

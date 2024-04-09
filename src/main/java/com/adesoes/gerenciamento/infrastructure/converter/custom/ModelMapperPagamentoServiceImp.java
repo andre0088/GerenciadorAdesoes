@@ -28,6 +28,8 @@ public class ModelMapperPagamentoServiceImp implements ModelMapperPagamentoServi
 		Pagamento pagamento = new Pagamento();
 		pagamento.setCobranca(cobrancaService.ListarPorId(pagamentoRequest.getIdCobranca()));
 		pagamento.setValor(pagamentoRequest.getValor());
+		pagamento.setData(pagamentoRequest.getData());
+		pagamento.setStatus(pagamentoRequest.getStatus());
 		
 		return pagamento;
 	}
